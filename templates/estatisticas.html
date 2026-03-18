@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="welcome">
+
+    <h2>Atributos do Jogador</h2>
+
+    <div style="display: flex; justify-content: center;">
+        <table class="tabela">
+            <tbody>
+
+                {% for chave, valor in atributos.items() %}
+                    <tr>
+                        <td><strong> {{ chave }}: </td>
+                        <td> {{ valor }} </td>
+                    </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+
+    <h2>Monstros Abatidos</h2>
+
+    <div style="display: flex; justify-content: center;">
+        <table class="tabela">
+            <tbody>
+
+                {% for nome, stats in monstros.items(): %}
+                    <tr>
+                        <td><strong> {{ nome }}: </td>
+                        <td> {{ stats['Abatidos'] }} </td>
+                    </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+
+</section>
+{% endblock %}

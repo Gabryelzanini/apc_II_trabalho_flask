@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block extra_menu %}
+<a href="{{ url_for('index') }}">Sair</a>
+{% endblock %}
+
+{% block content %}
+
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Hospital</title>
+    <meta http-equiv="refresh" content="5; url=/curado" />
+</head>
+<body><div style="text-align: center;">
+    <h1>Bem vindo, uma boa noite de sono te fará bem</h1>
+        <img src="{{ url_for('static', filename='images/ampulheta.gif') }}"
+    alt="Ampulheta"
+    width="250" 
+    
+    alt="Ampulheta">
+    
+    <h2>Volte sempre!</h2></div>
+</body>
+</html>
+
+{% endblock %}

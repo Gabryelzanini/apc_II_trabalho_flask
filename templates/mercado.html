@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="botoes-menu">
+    <h1>Ouro: {{ ouro }}</h1>
+<a href="{{ url_for('mercado_comprar') }}"><button>Comprar</button></a>
+<a href="{{ url_for('mercado_vender') }}"><button>Vender</button></a>
+</div>
+{% endblock %}

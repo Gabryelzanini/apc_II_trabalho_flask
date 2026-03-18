@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block extra_container_class %}container-centralizado{% endblock %}
+
+{% block content %}
+<section class="welcome">    
+    
+</section>
+<div class="botoes-menu">
+    <a href="{{ url_for('aventura') }}"><button>Aventura</button></a>
+    <a href="{{ url_for('mercado') }}"><button>Mercado</button></a>
+    <a href="{{ url_for('curar') }}"><button>Hospital</button></a>
+    <a href="{{ url_for('ferreiro') }}"><button>Ferreiro</button></a>
+</div>
+{% endblock %}

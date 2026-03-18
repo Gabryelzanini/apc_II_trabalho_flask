@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block extra_container_class %}container-centralizado{% endblock %}
+
+{% block content %}
+    
+<div class="botoes-menu">
+    <a href="{{ url_for('inventario_armas') }}"><button>Armas</button></a>
+    <a href="{{ url_for('inventario_materiais') }}"><button>Materiais</button></a>
+    <a href="{{ url_for('inventario_pocoes') }}"><button>Poções</button></a>
+</div>
+
+{% endblock %}

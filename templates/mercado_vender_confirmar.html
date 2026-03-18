@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block extra_menu %}
+<a href="{{ url_for('mercado_vender') }}">Voltar</a>
+{% endblock %}
+
+{% block content %}
+<div class="botoes-menu">
+    <h1>Deseja vender {{ nome_arma }}?</h1>
+
+    {% if tipo_item == 'arma' %}
+        <!-- Vender arma pelo ID, sem quantidade -->
+        <form action="{{ url_for('vender') }}" method="get">
+            <input type="hidden" name="item" value="{{ id }}">
+            <button type="submit" class="confirmar-btn" style="font-size: 18px;">Confirmar</button>
+        </form>
+    {% else %}
+        <!-- Poções ou materiais: pedir quantidade -->
+        <form action="{{ url_for('vender') }}" method="get">
+            <input type="hidden" name="item" value="{{ item }}">
+            <input type="number" name="quantidade" placeholder="Qtd" min="1" required>
+            <button type="submit" class="confirmar-btn">OK</button>
+        </form>
+    {% endif %}
+</div>
+{% endblock %}

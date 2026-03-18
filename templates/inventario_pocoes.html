@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block extra_menu %}
+<a href="{{ url_for('inventario') }}">Voltar</a>
+{% endblock %}
+
+{% block content %}
+
+    
+<section class="welcome">
+
+    <h2>Poções do Jogador</h2>
+
+    {% if pocoes['Cura'].values() | sum == 0 and pocoes['Força'].values() | sum == 0 %}
+
+        <p style="padding:25px">🔸 Nenhuma poção adquirida.</p>
+
+    {% else %}
+
+        <h2>🧪 Cura:</h2>
+
+        <div style="display: flex; justify-content: center;">
+            <table class="tabela">
+                <tbody>
+
+                    {% for nivel, qtd in pocoes['Cura'].items() %}
+
+                        <tr>
+                            <td><strong> {{ nivel }}: </strong></td>
+                            <td> {{ qtd }} </td>
+                        </tr>
+
+                    {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+
+        <h2>🧪 Força:</h2>
+
+        <div style="display: flex; justify-content: center;">
+            <table class="tabela">
+                <tbody>
+
+                    {% for nivel, qtd in pocoes['Força'].items() %}
+
+                        <tr>
+                            <td><strong> {{ nivel }}: </strong></td>
+                            <td> {{ qtd }} </td>
+                        </tr>
+
+                    {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+    
+    {% endif %}
+
+</section>
+
+
+{% endblock %}

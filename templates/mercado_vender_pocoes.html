@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block extra_menu %}
+<a href="{{ url_for('mercado_vender') }}">Voltar</a>
+{% endblock %}
+
+{% block content %}
+
+<section class="welcome">
+
+<h1>Ouro: {{ ouro }}</h1>
+
+    <div class="area-scroll" style="height: 60vh;">
+        <div class="botoes-menu">
+            <a href="{{ url_for('mercado_vender_confirmar_item', item='cura_nivel_1') }}">
+                <button>Poção de cura LVL 1</button>
+            </a>
+            <a href="{{ url_for('mercado_vender_confirmar_item', item='cura_nivel_2') }}">
+                <button>Poção de cura LVL 2</button>
+            </a>
+            <a href="{{ url_for('mercado_vender_confirmar_item', item='cura_nivel_3') }}">
+                <button>Poção de cura LVL 3</button>
+            </a>
+            <a href="{{ url_for('mercado_vender_confirmar_item', item='forca_nivel_1') }}">
+                <button>Poção de Força LVL 1</button>
+            </a>
+            <a href="{{ url_for('mercado_vender_confirmar_item', item='forca_nivel_2') }}">
+                <button>Poção de Força LVL 2</button>
+            </a>
+            <a href="{{ url_for('mercado_vender_confirmar_item', item='forca_nivel_3') }}">
+                <button>Poção de Força LVL 3</button>
+            </a>
+        </div>
+    </div>
+
+</section>
+{% endblock %}

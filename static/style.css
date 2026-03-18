@@ -1,0 +1,276 @@
+/* ==== Estilos gerais ==== */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(90deg, #000000, #34006e,#94f8ff,#34006e, #000000);
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+/* ==== Rodapé ==== */
+
+footer {
+  background: linear-gradient(90deg, #000000, #34006e,#34006e, #000000);
+  padding: 15px;
+  color: white;
+  margin-top: auto;
+}
+
+/* ==== Navbar ==== */
+.navbar {
+    background: linear-gradient(90deg, #000000, #34006e,#34006e, #000000);
+    color: white;
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 40px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.logo {
+    font-size: 2.5vw;
+    font-weight: bold;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+.menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 25px;
+    min-height: 2.5vh; /* min e max para não ficar mudando de tamanho quando não tem elemento no menu da navbar */
+    max-height: 2.5vh;
+}
+
+.menu a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.menu a:hover {
+    text-decoration: underline;
+    color: #ffe;
+}
+
+/* ==== Conteúdo principal ==== */
+.container {
+    flex: 1;
+    width: 90%;
+    max-width: 800px;
+    overflow: hidden;
+    margin: 20px auto;
+    background: #1b0944;
+    border-radius: 10px;
+    padding: 30px;
+}
+
+.container-centralizado {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ==== Páginas ==== */
+.welcome {
+    text-align: center;
+}
+
+.form-section h2,
+.list-section h2 {
+    margin-bottom: 20px;
+    color: #004aad;
+}
+
+.form-card {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-card label {
+    font-weight: bold;
+}
+
+.form-card input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+.btnsalvar{
+    background: #0052d4; 
+    color: white;
+    border: none;
+    padding: 10px 0;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.3s;
+
+}
+
+.btnsalvar:hover {
+    background: #003ea1;
+}
+
+.item-arma {
+    display: flex;
+    justify-content: center;
+}
+
+/* ==== Scroll ==== */
+
+.area-scroll {
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.area-scroll::-webkit-scrollbar { /* barra */
+    width: 8px;
+}
+
+.area-scroll::-webkit-scrollbar-track { /* fundo da barra */
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+.area-scroll::-webkit-scrollbar-thumb { /* a barra que desliza na barra */
+    background: #6a00ff;
+    border-radius: 10px;
+}
+
+.area-scroll::-webkit-scrollbar-thumb:hover { /* quando o mouse passa por cima da barra que desliza na barra */
+    background: #5100c7;
+}
+
+/* ==== Tabela ==== */
+
+.tabela {
+    width: 25%;
+    text-align: left;
+    padding: 50px;
+    border-spacing: 10px;
+    border-collapse: collapse;
+}
+
+.tabela tr:hover {
+    background: #230c5a;
+}
+
+/* ==== Botões ==== */
+
+.botoes-container,  /* container com botões básicos */
+.botoes-padrao,     /* container com botões padronizados */
+.botoes-menu {      /* container com botões para menu */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 35px;
+}
+
+.botoes-menu button,
+.botao-menu {
+    background-color: #44048d;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    cursor: pointer;
+    width: 165px;
+    height: 75px;
+}
+
+.botoes-padrao button,
+.botao-padrao {
+    background-color: #44048d;
+    border: none;
+    color: white;
+    display: inline-block;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    padding: 15px 32px;
+    font-size: 15px;
+    width: 120px;
+    height: 55px;
+}
+
+.botoes-padrao button:hover,
+.botoes-menu button:hover,
+.botao-padrao:hover, 
+.botao-menu:hover {
+    background-color: #5107a5;
+}
+
+/* ==== Flash ==== */
+
+.flash-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+}
+
+.flash-msg {
+    background: #333;
+    color: white;
+    padding: 12px 18px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    animation: fadeOut 4s forwards;
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+/* ==== Tooltip para armas ==== */
+
+.info-btn {
+    position: relative;
+    cursor: pointer;
+}
+
+.info-btn::after {
+    content: attr(data-info);
+    position: absolute;
+    left: 50%;
+    top: 10px;
+    transform: translate(-50%, -100%);
+    background: rgba(0, 0, 0, 0.85);
+    padding: 8px 12px;
+    color: white;
+    border-radius: 6px;
+    font-size: 14px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s ease-in-out;
+    z-index: 999;
+}
+
+.info-btn:hover::after {
+    animation: showTooltip 1s forwards;
+}
+
+@keyframes showTooltip {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}

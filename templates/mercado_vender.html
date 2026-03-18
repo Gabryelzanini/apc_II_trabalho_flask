@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block extra_menu %}
+<a href="{{ url_for('mercado') }}">Voltar</a>
+{% endblock %}
+
+
+{% block content %}
+
+<div class="botoes-menu">
+    <h1>Ouro: {{ ouro }}</h1>
+    <a href="{{ url_for('mercado_vender_armas') }}"><button>Armas</button></a>
+    <a href="{{ url_for('mercado_vender_pocoes') }}"><button>Poções</button></a>
+    <a href="{{ url_for('mercado_vender_material') }}"><button>Materiais</button></a>
+</div>
+{% endblock %}

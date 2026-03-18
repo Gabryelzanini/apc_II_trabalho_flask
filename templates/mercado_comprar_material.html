@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block extra_menu %}
+<a href="{{ url_for('mercado_comprar') }}">Voltar</a>
+{% endblock %}
+
+{% block content %}
+<section class="welcome">
+<h2>Materiais do Jogador</h2>
+<div style="display: flex; justify-content: center;">
+    <table class="tabela">
+        <tbody>
+
+                {% for material, qtd in materiais.items() %}
+                    <tr>
+                        <td><strong> {{ material }}: </td>
+                        <td> {{ qtd }} </td>
+                    </tr>
+                {% endfor %}
+
+        </tbody>
+    </table>
+</div>
+</section>
+<div class="botoes-menu">
+    <h1>Ouro: {{ ouro }}</h1>
+    <a href="{{ url_for('mercado_comprar_confirmar', item='Ferro') }}"><button>Ferro</button></a>
+    <a href="{{ url_for('mercado_comprar_confirmar', item='Ouro') }}"><button>Ouro</button></a>
+    <a href="{{ url_for('mercado_comprar_confirmar', item='Platina') }}"><button>Platina</button></a>
+</div>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <section class="welcome">
+
+    <h2> {{ nome }} </h2>
+
+    {% set dur_max = dur_base + (melhoria_por_nivel["Durabilidade"] * atributos["Qualidade"]) %}
+    {% set custo_por_dur = 2 %} <!-- Custo de ferro por ponto de durabilidade reparada -->
+    {% set dur_necessaria = dur_max - atributos["Durabilidade"] %}
+    {% set custo_total = dur_necessaria * custo_por_dur %}
+
+    {% if atributos["Durabilidade"] >= dur_max %}
+        <p>🔸Sua arma já está com durabilidade máxima.</p>
+        <a href="{{ url_for('ferreiro_reparar') }}"><button class="botao-padrao">Sair</button></a>
+    {% else %}
+        <p> Durabilidade: {{ atributos["Durabilidade"] }}/{{ dur_max }} </p>
+        <p> Custo total: <strong style="color: white;">{{ custo_total }}</strong> {{ "Ferros" if custo_total > 1 else "Ferro" }} </p>
+        <p style="font-size: 14px;"> (<strong>{{custo_por_dur}}</strong> {{ "Ferros" if custo_por_dur > 1 else "Ferro" }} por durabilidade) </p>
+
+        <div class="botoes-padrao" style="flex-direction: row; gap: 25px;">
+            {% if materiais["Ferro"] >= custo_total %}
+                <form action="/confirmar_reparo" method="POST">
+                    <input type="hidden" name="id_arma" value="{{ id_arma }}">
+                    <input type="hidden" name="custo_total" value="{{ custo_total }}">
+                    <input type="hidden" name="dur_max" value="{{ dur_max }}">
+
+                    <button type="submit">Reparar</button>
+                </form>
+
+                <a href="{{ url_for('ferreiro_reparar') }}"><button>Sair</button></a>
+            {% else %}
+                <p style="font-size: 15px; color: gray;"> {{"Falta" if custo_total - materiais["Ferro"] == 1 else "Faltam"}} {{custo_total - materiais["Ferro"]}} {{ "Ferros" if custo_total - materiais["Ferro"] > 1 else "Ferro" }} </p>
+                <a href="{{ url_for('ferreiro_reparar') }}"><button>Sair</button></a>
+            {% endif %}
+
+        </div>
+    {% endif %}
+
+    </section>
+
+{% endblock %}

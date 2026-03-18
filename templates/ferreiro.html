@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block extra_container_class %}container-centralizado{% endblock %}
+
+{% block content %}
+<div class="botoes-menu">
+    <h2>Bom dia meu bom cliente, o que precisa hoje?</h2>
+    <a href="{{ url_for('ferreiro_melhorar') }}"><button>Melhorar</button></a>
+    <a href="{{ url_for('ferreiro_reparar') }}"><button>Reparar</button></a>
+</div>
+{% endblock %}

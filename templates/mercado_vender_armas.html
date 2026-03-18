@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block extra_menu %}
+<a href="{{ url_for('mercado_vender') }}">Voltar</a>
+{% endblock %}
+
+
+{% block content %}
+
+<div class="area-scroll" style="height: 60vh;">
+    <div class="botoes-menu">
+        <h1>Ouro: {{ ouro }}</h1>
+
+        {% for id, arma in armas_adquiridas.items() %}
+            {% set nome_arma = arma.keys() | list | first %}
+            <a href="{{ url_for('mercado_vender_confirmar', item_id=id) }}">
+                <button style="font-size: 16px;">{{ nome_arma }} (ID: {{ id }})</button>
+            </a>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

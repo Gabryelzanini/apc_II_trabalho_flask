@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block extra_menu %}
+<a href="{{ url_for('batalha', monstro=monstro) }}">Voltar</a>
+{% endblock %}
+
+{% block content %}
+
+<h1>Escolha como atacar</h1>
+
+<div class="botoes-menu">
+
+    <!-- Botão de ataque com as mãos -->
+    <form action="{{ url_for('batalha_acao', monstro=monstro) }}" method="post" style="display:inline">
+        <button type="submit" name="acao" value="atacar_maos">Atacar com Mãos</button>
+    </form>
+
+    <h2>Armas disponíveis:</h2>
+
+    <div class="area-scroll" style="height: 20vh; padding: 40px; display:flex; flex-direction: column; gap: 25px;">
+        {% if armas_adquiridas %}
+            {% for id_arma, arma_info in armas_adquiridas.items() %}
+                {% if arma_info %}
+                    {% set nome_arma = arma_info.keys() | list | first %}
+                    {% set dados = arma_info[nome_arma] %}
+                    <form action="{{ url_for('batalha_acao', monstro=monstro) }}" method="post">
+                        <button class="info-btn"
+                                name="acao"
+                                value="atacar_arma_{{ id_arma }}"
+                                data-info="Dano: {{ dados['Dano'] }} | Ação: {{ dados['Ação'] }} | Durabilidade: {{ dados['Durabilidade'] }}">
+                            {{ nome_arma }}
+                        </button>
+                    </form>
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            <p>Você não possui armas.</p>
+        {% endif %}
+    </div>                
+</div>
+
+{% endblock %}

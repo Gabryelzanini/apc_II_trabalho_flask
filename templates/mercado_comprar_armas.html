@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block extra_menu %}
+<a href="{{ url_for('mercado_comprar') }}">Voltar</a>
+{% endblock %}
+
+{% block content %}
+
+<section class="welcome">
+
+    <h1>Ouro: {{ ouro }}</h1>
+
+    <div class="area-scroll" style="height: 60vh;">
+        <div class="botoes-menu">
+            <a href="{{ url_for('mercado_comprar_confirmar', item='Espada Curta') }}">
+                <button>Espada Curta</button>
+            </a>
+
+            <a href="{{ url_for('mercado_comprar_confirmar', item='Machado de Guerra') }}">
+                <button>Machado de Guerra</button>
+            </a>
+
+            <a href="{{ url_for('mercado_comprar_confirmar', item='Arco Longo') }}">
+                <button>Arco Longo</button>
+            </a>
+
+            <a href="{{ url_for('mercado_comprar_confirmar', item='Adaga') }}">
+                <button>Adaga</button>
+            </a>
+
+            <a href="{{ url_for('mercado_comprar_confirmar', item='Cajado Mágico') }}">
+                <button>Cajado Mágico</button>
+            </a>
+
+            <a href="{{ url_for('mercado_comprar_confirmar', item='Lança') }}">
+                <button>Lança</button>
+            </a>
+        </div>
+    </div>
+
+</section>
+{% endblock %}

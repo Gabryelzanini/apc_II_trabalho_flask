@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block extra_menu %}
+<a href="{{ url_for('mercado_comprar') }}">Voltar</a>
+{% endblock %}
+
+{% block content %}
+<div class="area-scroll botoes-container">
+    <h1>Ouro: {{ ouro }}</h1>
+
+    <form action="{{ url_for('comprar') }}" method="get">
+        <input type="hidden" name="item" value="{{ item }}">
+        <input type="number" name="quantidade" placeholder="Qtd" min="1" required>
+        <button type="submit" class="confirmar-btn">OK</button>
+    </form>
+</div>
+{% endblock %}

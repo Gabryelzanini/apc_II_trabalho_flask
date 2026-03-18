@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block extra_menu %}
+<a href="{{ url_for('batalha', monstro=monstro) }}">Voltar</a>
+{% endblock %}
+
+{% block content %}
+<h2>🧪 Usar Poção</h2>
+
+<div class="area-scroll" style="height: 60vh;">
+    <div class="botoes-padrao">
+        {% set total_pocoes = pocoes['Cura'].values() | sum + pocoes['Força'].values() | sum %}
+        {% if total_pocoes == 0 %}
+            <p>🔸 Nenhuma poção disponível.</p>
+        {% else %}
+
+            {% if pocoes['Cura'].values() | sum > 0 %}
+                <h3>🧪 Cura:</h3>
+                {% for nivel, qtd in pocoes['Cura'].items() %}
+                    {% if qtd > 0 %}
+                        <form action="{{ url_for('batalha_acao', monstro=monstro) }}" method="post">
+                            <button name="acao"
+                            class="info-btn"
+                            value="usar_pocao_Cura_{{ nivel }}"
+                            data-info="Quantidade: {{ qtd }}">
+                                {{ nivel }}
+                            </button>
+                        </form>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+
+            {% if pocoes['Força'].values() | sum > 0 %}
+                <h3>🧪 Força:</h3>
+                {% for nivel, qtd in pocoes['Força'].items() %}
+                    {% if qtd > 0 %}
+                        <form action="{{ url_for('batalha_acao', monstro=monstro) }}" method="post">
+                            <button name="acao" 
+                            class="info-btn"
+                            value="usar_pocao_Força_{{ nivel }}"
+                            data-info="Quantidade: {{ qtd }}">
+                                {{ nivel }}
+                            </button>
+                        </form>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+
+        {% endif %}
+    </div>
+
+    <div class="logs-box">
+        <h3>Logs da Batalha:</h3>
+        <ul>
+            {% for log in logs %}
+                <li>{{ log }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+{% endblock %}

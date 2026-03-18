@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block extra_menu %}
+<a href="{{ url_for('inventario') }}">Voltar</a>
+{% endblock %}
+
+{% block content %}
+
+<section class="welcome">
+
+    <h2>Materiais do Jogador</h2>
+
+    {% if materiais.values() | sum == 0 %}
+
+        <p style="padding:25px">🔸 Nenhum material adquirido.</p>
+
+    {% else %}
+
+        <div style="display: flex; justify-content: center;">
+            <table class="tabela">
+                <tbody>
+
+                        {% for material, qtd in materiais.items() %}
+                            <tr>
+                                <td><strong> {{ material }}: </td>
+                                <td> {{ qtd }} </td>
+                            </tr>
+                        {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+    
+    {% endif %}
+
+</section>
+
+{% endblock %}

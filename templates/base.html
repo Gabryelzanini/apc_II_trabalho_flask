@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Trabalho</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+
+            {% if request.endpoint == 'index' %}
+            <p>Trabalho de Python</p>
+            {% endif %}
+
+            {% if request.endpoint in ['mercado','mercado_comprar','mercado_vender','mercado_comprar_armas','mercado_comprar_material','mercado_comprar_pocoes','mercado_vender_armas','mercado_vender_material','mercado_vender_pocoes'] %}
+            <p>Mercado</p>
+            {% endif %}
+
+            {% if request.endpoint == 'estatisticas' %}
+            <p>Estatísticas</p>
+            {% endif %}
+
+            {% if request.endpoint == 'inventario' %}
+            <p>Inventário</p>
+            {% endif %}
+
+            {% if request.endpoint == 'inventario_armas' %}
+            <p>Armas</p>
+            {% endif %}
+
+            {% if request.endpoint == 'inventario_materiais' %}
+            <p>Materiais</p>
+            {% endif %}
+
+            {% if request.endpoint == 'inventario_pocoes' %}
+            <p>Poções</p>
+            {% endif %}
+
+            {% if request.endpoint == 'ferreiro' %}
+            <p>Ferreiro</p>
+            {% endif %}
+
+            {% if request.endpoint in ['ferreiro_melhorar', 'melhorar_arma'] %}
+            <p>Melhorar</p>
+            {% endif %}
+
+            {% if request.endpoint in ['ferreiro_reparar', 'reparar_arma'] %}
+            <p>Reparar</p>
+            {% endif %}
+
+            {% if request.endpoint == 'curar' %}
+            <p>Hospital</p>
+            {% endif %}
+
+            </div>
+            <ul class="menu">
+
+                {% if request.endpoint in ['inventario', 'inventario_armas', 'inventario_materiais', 'inventario_pocoes', 'index'] %}
+                    <a href="{{ url_for('estatisticas') }}">Estatísticas</a>
+                {% endif %}
+                
+                {% if request.endpoint in ['estatisticas', 'index'] %}
+                    <a href="{{ url_for('inventario') }}">Inventário</a>
+                {% endif %}
+
+                {% if request.endpoint in ['estatisticas', 'inventario', 'inventario_armas', 'inventario_materiais', 'inventario_pocoes', 'ferreiro', 'ferreiro_melhorar', 'ferreiro_reparar', 
+                                           'mercado', 'mercado_comprar', 'mercado_comprar_armas', 'mercado_comprar_material', 'mercado_comprar_pocoes', 'mercado_comprar_confirmar', 'mercado_vender', 
+                                           'mercado_vender_armas', 'mercado_vender_material', 'mercado_vender_pocoes', 'mercado_vender_confirmar', 'aventura'] %}
+                    <a href="{{ url_for('index') }}">Sair</a>
+                {% endif %}
+
+                {% block extra_menu %}
+                
+                {% endblock %}
+
+            </ul>
+        </nav>
+    </header>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="flash-container" style="position: absolute;">
+            {% for msg in messages %}
+                <div class="flash-msg">{{ msg }}</div>
+            {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <main class="container {% block extra_container_class %}{% endblock %}">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer></footer>
+
+</body>
+</html>

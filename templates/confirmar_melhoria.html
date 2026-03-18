@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <section class="welcome">
+
+        {% set dur_max = dur_base + (atributos["Qualidade"] * melhoria_por_nivel["Durabilidade"]) %}
+        {% set proximo_level = atributos["Qualidade"] + 1 %}
+        {% set requisitos = req[proximo_level] %}
+
+        {% if atributos["Qualidade"] >= melhoria_por_nivel["Melhoria Máxima"] %}
+            <p style="padding:25px">🔸Sua arma já está na qualidade máxima!</p>
+            <div class="botoes-container">
+                <a href="{{ url_for('ferreiro_melhorar') }}"><button class="botao-padrao">Sair</button></a>
+            </div> 
+        {% else %}
+            
+            <h2>{{ nome }}</h2>
+            <p>Durabilidade = {{ atributos["Durabilidade"] }}/{{ dur_max }} -> {{ dur_max + melhoria_por_nivel["Durabilidade"] }}</p>
+            <p>Dano = {{ atributos["Dano"] }} -> {{ atributos["Dano"] + melhoria_por_nivel["Dano"] }}</p>
+            <p>Chance Crítico = {{ atributos["Chance Critico"] }} -> {{ atributos["Chance Critico"] + melhoria_por_nivel["Chance Critico"] }}</p>
+            <p>Encantamento = {{ atributos["Encantamento"] if atributos["Encantamento"] else "Nenhum" }}</p>
+            <p>Qualidade = {{ atributos["Qualidade"] }} -> {{ atributos["Qualidade"] + 1 }}</p>
+            <p>Ação = {{ atributos["Ação"] }}</p>
+
+            <h2>Requisitos</h2>
+            
+            {% for level, requisitos in req.items() %}
+                {% if atributos["Qualidade"] + 1 == level %}
+                    {% for material, quantidade in requisitos.items() %}
+                        {% if quantidade > 0 %}
+                            <p>{{ material }}: {{ quantidade }}</p>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
+
+            <div style="font-size: 12px; color: gray; margin: 15px;">
+
+                {% set ns = namespace(pode_upar=True, faltou_algo=False) %}
+
+                {% for material, quantidade_necessaria in requisitos.items() %}
+                    {% if materiais.get(material, 0) < quantidade_necessaria %}
+                        {% if not ns.faltou_algo %}Faltam{% endif %}
+                        {% set ns.faltou_algo = True %}
+                        |   {{ quantidade_necessaria - materiais.get(material, 0) }} de {{ material }}
+                        {% set ns.pode_upar = False %}
+                    {% endif %}
+                {% endfor %}
+
+            </div>
+                
+            <div class="botoes-container" style="flex-direction: row; gap: 20px;">
+                {% if ns.pode_upar == False %}
+                    <a href="{{ url_for('ferreiro_melhorar') }}"><button class="botao-padrao">Sair</button></a>
+                {% else %}
+                    <form action="/confirmar_melhoria" method="POST">
+                        <input type="hidden" name="id_arma" value="{{ id_arma }}">
+                        <button type="submit" class="botao-padrao">Melhorar</button>
+                    </form>
+
+                    <a href="{{ url_for('ferreiro_melhorar') }}"><button class="botao-padrao">Sair</button></a>
+                {% endif %}
+            </div>
+
+        {% endif %}
+
+    </section>
+
+{% endblock %}
+
+<!--
+
+    id_arma = request.form.get('id_arma')
+    id_arma = int(id_arma)
+    arma = dicionarios.armas_adquiridas[id_arma]
+    nome = next(iter(arma))
+    atributos = arma[nome]
+
+    return render_template(
+        "confirmar_melhoria.html",
+        id_arma=id_arma,
+        nome=nome,
+        atributos=atributos,
+        materiais=dicionarios.materiais_adquiridos,
+        req=dicionarios.req_melhoria
+    )
+-->

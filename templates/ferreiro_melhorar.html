@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block extra_menu %}
+<a href="{{ url_for('ferreiro') }}">Voltar</a>
+{% endblock %}
+
+{% block content %}
+
+<section class="welcome">
+
+    <div style="display: flex; justify-content: center;">
+        <table class="tabela">
+            <tbody>
+                
+                <tr>
+                    <td><strong>Meus materiais</strong></td>
+                </tr>
+
+                {% for material, quantidade in materiais.items() %}
+                    <tr>
+                        <td> {{ material }}: </td>
+                        <td> {{ quantidade }} </td>
+                    </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+
+    <div>
+        <h2>Armas do Jogador</h2>
+
+        <div class="area-scroll" style="height: 50vh;">
+            {% if not armas_dic %}
+                <p style="padding:25px">🔸 Nenhuma arma adquirida.</p>
+            {% else %}
+                {% for id_item, arma in armas_dic.items() %}
+                    {% set nome = arma|first %}
+                    
+                    <form action="/melhorar_arma" method="POST">
+                        <p><strong>({{ id_item }}) | {{ nome }} | Qualidade: {{ arma[nome]['Qualidade'] }}</strong></p>
+
+                        <input type="hidden" name="id_arma" value="{{ id_item }}">
+
+                        <button type="submit" class="botao-padrao">Melhorar</button>
+                    </form>
+
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+
+</section>
+
+{% endblock %}

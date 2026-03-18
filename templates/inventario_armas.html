@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block extra_menu %}
+<a href="{{ url_for('inventario') }}">Voltar</a>
+{% endblock %}
+
+{% block content %}
+
+    
+<section class="welcome">
+    <div class="conteudo-armas">
+        <h2>Armas do Jogador</h2>
+
+        <div class="area-scroll" style="height: 60vh;">
+            {% if not armas_dic %}
+                <p style="padding:25px">🔸 Nenhuma arma adquirida.</p>
+            {% else %}
+                {% for i, armas in armas_dic.items() %}
+                    {% for nome_arma, atributos in armas.items() %}
+                        <p><strong> ({{ i }}) {{ nome_arma }} </strong></p>
+                        {% for atributo, valor in atributos.items() %}
+                            <div class="item-arma">
+                                <table class="tabela">
+                                    <tbody>
+                                        <tr>
+                                            {% if atributo == "Encantamento" %}
+                                                <td> {{ atributo }}: {{ atributos["Encantamento"] if atributos["Encantamento"] else "Nenhum" }} </td>
+                                            {% else %}
+                                                 <td> {{ atributo }}: {{ valor }} </td>
+                                            {% endif %}  
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}
